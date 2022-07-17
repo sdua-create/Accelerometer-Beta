@@ -141,7 +141,7 @@
                 for (let i = 0; i < data.length; i++) {
                     str += "[" + data[i][0] +  "], "
                 }
-                str = str.substring(0, str.length - 2);
+                str = str.substring(0, str.length);
                 str += "]"
                 document.getElementById("dataFeild").style.display = "block";
                 document.getElementById("textarea").value = str;
