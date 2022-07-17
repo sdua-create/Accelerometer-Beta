@@ -41,6 +41,7 @@
                 <h6 id="valX"></h6>
                 <h6 id="valY"></h6>
                 <h6 id="valZ"></h6>
+                <h6 id="accel"></h6>
             </div>
             <div class="row">
                 <a id="StartRecording" class="waves-effect waves-light btn green" onclick=StartRecording()><i
@@ -67,6 +68,8 @@
                     <thead>
                         <th>X</th>
                         <th>Y</th>
+                        <th>Z</th>
+                        <th>accl</th>
                     </thead>
                     <tbody id="tbody"></tbody>
                 </table>
@@ -81,21 +84,23 @@
         let recording = false;
 
         let data = [
-            // [251, 365,546], [4, 45,78], [64, 5,99],
-            // [251, 365,546], [4, 45,78], [64, 5,99],
-            // [251, 365,546], [4, 45,78], [64, 5,99],
-            // [251, 365,546], [4, 45,78], [64, 5,99],
-            // [251, 365,546], [4, 45,78], [64, 5,99],
-            // [251, 365,546], [4, 45,78], [64, 5,99],
-            // [251, 365,546], [4, 45,78], [64, 5,99],
-            // [251, 365,546], [4, 45,78], [64, 5,99],
-            // [251, 365,546], [4, 45,78], [64, 5,99],
-            // [251, 365,546], [4, 45,78], [64, 5,99],
-            // [251, 365,546], [4, 45,78], [64, 5,99],
-            // [251, 365,546], [4, 45,78], [64, 5,99],
-            // [251, 365,546], [4, 45,78], [64, 5,99],
-            // [251, 365,546], [4, 45,78], [64, 5,99],
-            // [251, 365,546], [4, 45,78], [64, 5,99]
+             // [251, 365,546,7], [4, 45,78,67], [64, 5,99,89],
+            // [251, 365,546,7], [4, 45,78,67], [64, 5,99,89],
+            // [251, 365,546,7], [4, 45,78,67], [64, 5,99,89],
+            // [251, 365,546,7], [4, 45,78,67], [64, 5,99,89],
+            // [251, 365,546,7], [4, 45,78,67], [64, 5,99,89],
+            // [251, 365,546,7], [4, 45,78,67], [64, 5,99,89],
+            // [251, 365,546,7], [4, 45,78,67], [64, 5,99,89],
+            // [251, 365,546,7], [4, 45,78,67], [64, 5,99,89],
+            // [251, 365,546,7], [4, 45,78,67], [64, 5,99,89],
+            // [251, 365,546,7], [4, 45,78,67], [64, 5,99,89],
+            // [251, 365,546,7], [4, 45,78,67], [64, 5,99,89],
+            // [251, 365,546,7], [4, 45,78,67] [64, 5,99,89],
+            // [251, 365,546,7], [4, 45,78,67], [64, 5,99,89],
+            // [251, 365,546,7], [4, 45,78,67], [64, 5,99,89],
+            // [251, 365,546,7], [4, 45,78,67], [64, 5,99,89],
+            // [251, 365,546,7], [4, 45,78,67], [64, 5,99,89],
+            // [251, 365,546,7], [4, 45,78,67], [64, 5,99,89],
         ];
 
         if (window.DeviceMotionEvent == undefined) {
@@ -109,14 +114,16 @@
             let x = (event.accelerationIncludingGravity.x * 1).toFixed(2);
             let y = (event.accelerationIncludingGravity.y * 1).toFixed(2);
             let z = (event.accelerationIncludingGravity.z* 1).toFixed(2);
+            let accl = Math.pow(Math.pow(x,2) + Math.pow(y,2) + Math.pow(z,2), 0.5);
             document.getElementById("valX").innerText = "Acceleration along the X-axis " + x;
             document.getElementById("valY").innerText = "Acceleration along the Y-axis " + y;
             document.getElementById("valZ").innerText = "Acceleration along the Z-axis " + z;
+            document.getElementById("accel").innerText = "Acceleration"+accl;
 
             if (recording) {
-                let str = "<tr><td>" + x + "</td><td>" + y +"</td><td>" +z+"</td></tr>";
+                let str = "<tr><td>" + x + "</td><td>" + y +"</td><td>" +z+"</td></td>"+accl+"</td></tr>";
                 document.getElementById("tbody").innerHTML += str;
-                data.push([x, y,z])
+                data.push([x, y,z,accl])
             }
         }
 
