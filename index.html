@@ -66,10 +66,7 @@
             <div class="row">
                 <table id="table" style="display: none;" class="highlight">
                     <thead>
-                        <th>X</th>
-                        <th>Y</th>
-                        <th>Z</th>
-                        <th>accl</th>
+                       <th>accl</th>
                     </thead>
                     <tbody id="tbody"></tbody>
                 </table>
@@ -121,9 +118,9 @@
             document.getElementById("accel").innerText = "Acceleration "+accl;
 
             if (recording) {
-                let str = "<tr><td>" + x + "</td><td>" + y +"</td><td>" +z+"</td></td>"+accl+"</td></tr>";
+                let str ="<tr><td>" +accl+"</td></tr>";
                 document.getElementById("tbody").innerHTML += str;
-                data.push([x, y,z,accl])
+                data.push([accl])
             }
         }
 
