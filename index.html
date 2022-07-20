@@ -81,6 +81,8 @@
         <p id="err"></p>
     </div>
     <script type="text/javascript">
+        console.log("Current Date:");
+        console.log(Date.now());
         let recording = false;
 
         let data = [
@@ -101,6 +103,9 @@
             // [251, 365,7], [4, 45,87], [64, 5,32]
             
         ];
+        let current_time = Date.now();
+        const threshold = 200;
+        let reading_count = 0;
 
         if (window.DeviceMotionEvent == undefined) {
             document.getElementById("activated").style.display = "none";
@@ -118,11 +123,23 @@
             document.getElementById("valY").innerText = "Acceleration along the Y-axis " + y;
             document.getElementById("valZ").innerText = "Acceleration along the Z-axis " + z;
            
-
             if (recording) {
-                let str ="<tr><td>" + x + "</td><td>" + y + "</td><td>" + z +"</td></tr>";
-                document.getElementById("tbody").innerHTML += str;
-                data.push([x,y,z])
+                if (reading_count < threshold) {
+                    // save
+                    let temp_time = Date.now();
+                    if (temp_time - current_time > 50) {
+                        let str ="<tr><td>" + x + "</td><td>" + y + "</td><td>" + z +"</td></tr>";
+                        document.getElementById("tbody").innerHTML += str;
+                        data.push([x,y,z]);
+                        current_time = Date.now();
+                        reading_count++;
+                    }
+                }
+                else {
+                    // stop
+                    alert("Enough data has been collected!");
+                    StopRecording();
+                }
             }
         }
 
